@@ -26,7 +26,7 @@ router.post('/login', async (req, res) => {
       const reqUserName = req.body.name
       const reqUserPassword= req.body.password
 
-      const reqUser = { name: reqUserName, password: reqUserPassword }
+      const reqUser = { name: reqUserName, password: userPassword }
 
       const accessToken = jwt.sign(reqUser, process.env.ACCESS_TOKEN_SECRET)
       res.status(200).json({accessToken: accessToken})
@@ -37,15 +37,22 @@ router.post('/login', async (req, res) => {
   } catch{
     res.status(500).send()
   }
-});
+})
 
+router.get('/auth', (req, res) => {
+  const authHeader = req.headers['authorization']
+  const token = authHeader
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.json([
-    {id:1, username:'Vinod'}
-  ]);
-});
+  if (token == null) {
+    res.sendStatus(401)
+  }
+  else {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user)=> {
+      if (err) return res.sendStatus(409)
+      res.json({ authentication: true })
+    })
+  }
+})
 
 
 

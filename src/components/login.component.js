@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Alert} from 'react-bootstrap';
+import { createBrowserHistory } from 'history';
+
+const history = createBrowserHistory();
 
 export default class Login extends Component {
 
@@ -54,6 +57,7 @@ export default class Login extends Component {
         statusCode: 200
       })
       console.log(referenceThis.state)
+      referenceThis.handleAuth(data.accessToken)
     })
     .catch(function(error) {
         console.log(error)
@@ -82,6 +86,33 @@ export default class Login extends Component {
       statusCode: error.status
     })
     console.log(this.state)
+  }
+
+  handleAuth(token){
+    fetch('/users/auth', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': token,
+      }
+    })
+    .then(function(response) {
+      if (!response.ok) {
+        console.log(response)
+        throw Error(response.status)
+      }
+      else{
+        return response.json()
+      }
+    })
+    .then(function(data) {
+      console.log(data)
+      history.push('/home');
+      window.location.reload();
+    })
+    .catch(function(error) {
+      console.log(error)
+    })
   }
 
   render() {
