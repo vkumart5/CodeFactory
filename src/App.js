@@ -4,9 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container} from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Login from "./components/login.component";
-//import SignUp from "./components/signup.component";
-import Home from "./components/home.component";
+import Login from './components/login.component.js';
+import Home from './components/home.component.js';
+import Orders from './components/orders.component.js';
+import Settings from './components/settings.component.js';
 
 class App extends Component{
 
@@ -28,6 +29,8 @@ class App extends Component{
                 <Switch>
                   <Route exact path='/' component={Login} />
                   <Route path="/home" component={Home} />
+                  <Route path="/orders" component={Orders} />
+                  <Route path="/settings" component={Settings} />
                 </Switch>
               </Router>
               </div>

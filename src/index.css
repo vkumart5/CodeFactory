@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.react-bs-table table {
+    margin-bottom: 0;
+    table-layout: fixed;
+}
+
+#myModal{
+  opacity: 1 !important;
+}
+
+.modal-dialog{
+  margin-top: 200px !important;
+}
+
+.thumbnailImage{
+  width: 300px;
+  height: 300px;
+  margin: 10px auto;
+}
+
+.thumbnailAnchor{
+  text-align: center;
+  width: 100%;
+  display: block;
+}
